@@ -14,6 +14,11 @@ app.use( express.static( path.resolve( __dirname, "../dist" ) ) );
 
 app.get( "/*", ( req, res ) => {
     const context = { };
+
+    // Static Router https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/StaticRouter.md
+    // why do you need to give a location in the first place?
+    // eslint-disable-next-line max-len
+    // context is used for tracking potential redirects while rendering the ReactDOM. This is handled with at 3XX response from the server
     const jsx = (
         <StaticRouter context={ context } location={ req.url }>
             <Layout />
@@ -27,6 +32,8 @@ app.get( "/*", ( req, res ) => {
 
 app.listen( 2048 );
 
+// since the client code has changed we need to mimic that on the server
+// so that ReactDOM.hydrate can properly attached the handlers to the elements.
 function htmlTemplate( reactDom ) {
     return `
         <!DOCTYPE html>
