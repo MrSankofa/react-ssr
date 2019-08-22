@@ -7,7 +7,7 @@
     "build": "NODE_ENV=production webpack --progress",
     "dev": "npm-run-all --parallel server client",
     "server": "nodemon index.js",
-    "client": "webpack --watch --progress",
+    "client": "webpack -p --watch --progress",
     "linter": "eslint src",
     "bundlesize": "bundlesize",
     "precommit": "eslint src --quiet"
